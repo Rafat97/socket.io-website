@@ -150,6 +150,9 @@ const main = async () => {
 
     sponsors
       .map((node) => {
+        if (node.account === null) {
+          return null;
+        }
         const customImage = customImages.get(node.account.slug);
         if (customImage) {
           if (customImage.img) {
@@ -165,6 +168,9 @@ const main = async () => {
         return node;
       })
       .filter((node) => {
+        if (!node) {
+          return false;
+        }
         const isSubscriptionActive =
           node.tier && node.tier.name === "Sponsors" && node.isActive;
         const totalDonations = node.totalDonations.value;
